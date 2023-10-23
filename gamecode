@@ -1,0 +1,33 @@
+> oyun1=oyun_csv %>% group_by(`Game Name`,`Partner Group`) %>% summarise(min_date=min(Date),Players)
+`summarise()` has grouped output by 'Game Name', 'Partner Group'. You can override
+using the `.groups` argument.
+Warning message:
+Returning more (or less) than 1 row per `summarise()` group was deprecated in
+dplyr 1.1.0.
+ℹ Please use `reframe()` instead.
+ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
+  always returns an ungrouped data frame and adjust accordingly.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated. 
+> View(oyun1)
+> oyun1=oyun_csv %>% group_by(`Game Name`,`Partner Group`) %>% summarise(min_date=min(Date),Players,Date)
+`summarise()` has grouped output by 'Game Name', 'Partner Group'. You can override
+using the `.groups` argument.
+Warning message:
+Returning more (or less) than 1 row per `summarise()` group was deprecated in
+dplyr 1.1.0.
+ℹ Please use `reframe()` instead.
+ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
+  always returns an ungrouped data frame and adjust accordingly.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated. 
+> oyun1$min_date=mdy(oyun1$min_date)
+> oyun1$Date=mdy(oyun1$Date)
+> oyun1$ferq=oyun1$date-oyun1$min_date
+Error in `-.Date`(oyun1$date, oyun1$min_date) : 
+  can only subtract from "Date" objects
+In addition: Warning message:
+Unknown or uninitialised column: `date`. 
+> oyun1$ferq=oyun1$Date-oyun1$min_date
+> View(oyun1_filtered)
+> oyun1_filtered = oyun1 %>%filter(ferq < 14)
